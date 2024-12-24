@@ -1,9 +1,5 @@
 import { useState } from 'react';
-
-interface CounterTracker {
-  count: number;
-  lastClick: number | null;
-}
+import { CounterTracker } from '../types';
 
 export const useCounterTracker = () => {
   const [state, setState] = useState<CounterTracker>({

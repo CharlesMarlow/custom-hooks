@@ -2,11 +2,16 @@ import Section from './components/Section';
 import { useCounter } from './lib/hooks/useCounter';
 import { useMousePosition } from './lib/hooks/useMousePosition';
 import { useCounterTracker } from './lib/hooks/useCounterTracker';
+import { useFetchData } from './lib/hooks/useFetchData';
+import { Post } from './lib/types';
 
 const App = () => {
   const { count, increment, decrement } = useCounter();
   const { xPosition, yPosition } = useMousePosition();
   const { state, incrementCountAndSetLastClick } = useCounterTracker();
+  const { data, loading, error } = useFetchData<Post[]>(
+    'https://jsonplaceholder.typicode.com/posts'
+  );
 
   return (
     <div className='h-screen grid grid-rows-2 grid-cols-3 gap-4 p-4'>
@@ -33,7 +38,7 @@ const App = () => {
       </Section>
       <Section
         title='useMousePosition'
-        description="Tracks the mouse's x and y positions in real-time"
+        description="Tracks the mouse's x and y positions in real-time."
       >
         <div className='flex items-center justify-between space-x-4 mt-20'>
           <div className='border border-zinc-400 p-2'>{`X Position: ${xPosition}`}</div>
@@ -42,7 +47,7 @@ const App = () => {
       </Section>
       <Section
         title='useCounterTracker'
-        description='Tracks a counter and records the timestamp of the last increment'
+        description='Tracks a counter and records the timestamp of the last increment.'
       >
         <div className='flex flex-col items-center space-x-4 mt-20'>
           <button
@@ -54,6 +59,24 @@ const App = () => {
               ? new Date(state.lastClick).toLocaleString()
               : 'Never'}
           </p>
+        </div>
+      </Section>
+
+      {/* Bottom Sections */}
+      <Section
+        title='useFetchData'
+        description='Fetches data from an API, managing loading state and errors.'
+      >
+        <div className='flex flex-col items-center space-x-4 mt-6'>
+          {loading && <div>Loading...</div>}
+          {error && <div>{error}</div>}
+          {data && data.length > 0 && (
+            <div>
+              {data.slice(0, 5).map((post) => (
+                <p key={post.id}>{`Title: ${post.title}`}</p>
+              ))}
+            </div>
+          )}
         </div>
       </Section>
     </div>
