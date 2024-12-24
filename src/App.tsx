@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import Section from './components/Section';
 import { useCounter } from './lib/hooks/useCounter';
 import { useMousePosition } from './lib/hooks/useMousePosition';
 import { useCounterTracker } from './lib/hooks/useCounterTracker';
 import { useFetchData } from './lib/hooks/useFetchData';
+import { useDebounce } from './lib/hooks/useDebounce';
 import { Post } from './lib/types';
 
 const App = () => {
@@ -12,6 +14,9 @@ const App = () => {
   const { data, loading, error } = useFetchData<Post[]>(
     'https://jsonplaceholder.typicode.com/posts'
   );
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const handleSearch = (value: string) => console.log(`Searching ${value}`);
+  const [debouncedValue] = useDebounce(searchTerm, handleSearch, 300);
 
   return (
     <div className='h-screen grid grid-rows-2 grid-cols-3 gap-4 p-4'>
@@ -77,6 +82,19 @@ const App = () => {
               ))}
             </div>
           )}
+        </div>
+      </Section>
+      <Section
+        title='useDebounce'
+        description='Delays updating a value until after a specified wait time and invokes a callback with the debounced value.'
+      >
+        <div className='flex flex-col items-center space-x-4 mt-16'>
+          <input
+            type='text'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <p>Search term: {debouncedValue}</p>
         </div>
       </Section>
     </div>
