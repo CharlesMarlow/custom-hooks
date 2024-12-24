@@ -1,8 +1,11 @@
 import { useCounter } from './lib/hooks/useCounter';
+import { useMousePosition } from './lib/hooks/useMousePosition';
+
 import Section from './components/Section';
 
 const App = () => {
   const { count, increment, decrement } = useCounter();
+  const { xPosition, yPosition } = useMousePosition();
 
   return (
     <div className='h-screen grid grid-rows-2 grid-cols-3 gap-4 p-4'>
@@ -25,6 +28,15 @@ const App = () => {
           >
             Increment
           </button>
+        </div>
+      </Section>
+      <Section
+        title='useMousePosition'
+        description="Tracks the mouse's x and y positions in real-time."
+      >
+        <div className='flex items-center justify-between space-x-4 mt-24'>
+          <div className='border border-zinc-400 p-2'>{`X Position: ${xPosition}`}</div>
+          <div className='border border-zinc-400 p-2'>{`Y Position: ${yPosition}`}</div>
         </div>
       </Section>
     </div>

@@ -9,7 +9,7 @@ interface SectionProps {
 const Section: FC<SectionProps> = ({ title, children, description }) => {
   return (
     <div className='p-6 border rounded-lg shadow-md bg-white'>
-      <h2 className='text-2xl font-semibold mb-2'>{title}</h2>
+      <h2 className='text-2xl font-semibold mb-2 underline'>{title}</h2>
       {description && <p className='text-gray-600 mb-4'>{description}</p>}
       <div>{children}</div>
     </div>
