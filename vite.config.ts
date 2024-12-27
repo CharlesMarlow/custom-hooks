@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitest/config';
 
-// Vite Configuration
 export default defineConfig({
   // plugins: [react()],
   test: {

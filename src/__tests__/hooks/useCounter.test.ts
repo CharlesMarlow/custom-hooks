@@ -1,16 +1,22 @@
 import { renderHook, act } from '@testing-library/react';
 import { useCounter } from '../../lib/hooks/useCounter';
 
-describe('useCounter', () => {
-  it('should initialize with a count of 0', () => {
-    const { result } = renderHook(() => useCounter());
+describe.only('useCounter', () => {
+  let result: {
+    current: { count: number; increment: () => void; decrement: () => void };
+  };
 
+  beforeEach(() => {
+    // Setup the hook before each test
+    const hookResult = renderHook(() => useCounter());
+    result = hookResult.result;
+  });
+
+  it('should initialize with a count of 0', () => {
     expect(result.current.count).toBe(0);
   });
 
   it('should increment the count', () => {
-    const { result } = renderHook(() => useCounter());
-
     act(() => {
       result.current.increment();
     });
@@ -19,8 +25,6 @@ describe('useCounter', () => {
   });
 
   it('should decrement the count', () => {
-    const { result } = renderHook(() => useCounter());
-
     act(() => {
       result.current.decrement();
     });
@@ -29,8 +33,6 @@ describe('useCounter', () => {
   });
 
   it('should increment and decrement correctly in sequence', () => {
-    const { result } = renderHook(() => useCounter());
-
     act(() => {
       result.current.increment();
       result.current.increment();

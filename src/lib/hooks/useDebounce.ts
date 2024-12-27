@@ -6,11 +6,13 @@ export const useDebounce = (
   wait: number
 ) => {
   const [debouncedValue, setDebouncedValue] = useState<string>(input);
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(input);
     }, wait);
 
+    // Clean up the previous timeout on input change
     return () => clearTimeout(handler);
   }, [input, wait]);
 

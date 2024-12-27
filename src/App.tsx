@@ -112,6 +112,7 @@ const App = () => {
       >
         <div className='flex flex-col items-center space-x-4 mt-16'>
           <input
+            maxLength={56}
             type='text'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}

@@ -8,6 +8,10 @@
     "target": "ESNext",
     "moduleResolution": "node",
     "jsx": "react-jsx",
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
   }
 }
