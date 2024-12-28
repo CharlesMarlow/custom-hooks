@@ -1,9 +1,10 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
+  // "files": [],
+  // "references": [
+  //   { "path": "./tsconfig.app.json" },
+  //   { "path": "./tsconfig.node.json" }
+  // ],
+  "include": ["src", "test/vitest.setup.ts"],
   "compilerOptions": {
     "target": "ESNext",
     "moduleResolution": "node",
@@ -12,6 +13,6 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
-    },
+    }
   }
 }

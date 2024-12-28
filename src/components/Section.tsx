@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 interface SectionProps {
   title: string;
@@ -7,16 +7,9 @@ interface SectionProps {
   className?: string;
 }
 
-const Section: FC<SectionProps> = ({
-  title,
-  children,
-  description,
-  className,
-}) => {
+const Section = ({ title, children, description, className }: SectionProps) => {
   return (
-    <div
-      className={`p-6 border rounded-lg shadow-md ${className || ''}`}
-    >
+    <div className={`p-6 border rounded-lg shadow-md ${className || ''}`}>
       <h2 className='text-2xl font-semibold mb-2 underline'>{title}</h2>
       {description && <p className='text-gray-700 mb-4'>{description}</p>}
       <div>{children}</div>
